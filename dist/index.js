@@ -293,9 +293,11 @@ class YoutubeSearchApi {
                 const page = yield this.getYoutubeInitData(endpoint);
                 const playerData = yield this.getYoutubePlayerDetail(endpoint);
                 const result = yield page.initdata.contents.twoColumnWatchNextResults;
-                const firstContent = yield result.results.results.contents[0]
+                const firstContent = yield result.results.results.contents
+                    .filter((c) => c.hasOwnProperty("videoPrimaryInfoRenderer"))[0]
                     .videoPrimaryInfoRenderer;
-                const secondContent = yield result.results.results.contents[1]
+                const secondContent = yield result.results.results.contents
+                    .filter((c) => c.hasOwnProperty("videoSecondaryInfoRenderer"))[0]
                     .videoSecondaryInfoRenderer;
                 const res = yield {
                     id: playerData.videoId,

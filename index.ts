@@ -351,9 +351,11 @@ export class YoutubeSearchApi {
       const playerData = await this.getYoutubePlayerDetail(endpoint)
 
       const result = await page.initdata.contents.twoColumnWatchNextResults
-      const firstContent = await result.results.results.contents[0]
+      const firstContent = await result.results.results.contents
+        .filter((c: any) => c.hasOwnProperty("videoPrimaryInfoRenderer"))[0]
         .videoPrimaryInfoRenderer
-      const secondContent = await result.results.results.contents[1]
+      const secondContent = await result.results.results.contents
+        .filter((c: any) => c.hasOwnProperty("videoSecondaryInfoRenderer"))[0]
         .videoSecondaryInfoRenderer
       const res = await {
         id: playerData.videoId,
