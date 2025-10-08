@@ -30,6 +30,13 @@ function test() {
     });
 }
 test();
+function test2() {
+  return __awaiter(this, void 0, void 0, function* () {
+    let videoDetails = yield api.getVideoDetails("w15oWDh02K4");
+    console.log(videoDetails);
+  });
+}
+test2();
 // Original examples
 //
 // api.search("JSDeveloper", true, 2, [{ type: "video" }])
